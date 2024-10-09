@@ -10,20 +10,19 @@ def exchange():
     code = entry.get()
     if code:
         try:
-            response = requests.get("https://open.er-api.com/v6/latest/USD")
+            response = requests.get('https://open.er-api.com/v6/latest/USD')
             response.raise_for_status()
             data = response.json()
-            if code in data['rates']
+            if code in data['rates']:
                 exchange_rate = ['rates'][code]
-                mb.showinfo("курс обмена", f"Курс {exchange_rate}-{code} за доллар")
+                mb.showinfo("курс обмена", f"Курс {exchange_rate:.2f} {code} за доллар")
             else:
                 mb.showerror("Ошибка", f"валюта {code} не найдена")
 
-        except Exceotion as e:
+        except Exception as e:
             mb.showerror("Ошибка", f"ошибка {e}")
     else:
-        mb.showwarning("Внимание!"б f"Введите код валюты")
-
+        mb.showwarning("Внимание!", f"Введите код валюты")
 
 window = Tk()
 window.title("Курс обмена валют")
@@ -34,7 +33,7 @@ Label(text="введите код валюты").pack(padx=10, pady=10)
 entry = Entry()
 entry.pack(padx=10, pady=10)
 
-Button(text="курс обмена к доллару", command=exchenge).pack(padx=10, pady=10)
+Button(text="курс обмена к доллару", command=exchange).pack(padx=10, pady=10)
 
 window.mainloop()
 
